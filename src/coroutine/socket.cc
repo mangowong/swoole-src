@@ -1348,12 +1348,10 @@ bool Socket::ssl_handshake()
     {
         return false;
     }
-    ssl_context = swSSL_get_context(&ssl_option);
-    if (ssl_context == NULL)
+    if (!ssl_check_context())
     {
         return false;
     }
-
     if (ssl_option.verify_peer)
     {
         if (swSSL_set_capath(&ssl_option, ssl_context) < 0)
